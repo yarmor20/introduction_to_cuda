@@ -11,7 +11,7 @@ Example:
 
 ```
 Videocard:              NVIDIA GeForce GTX 960M
-Microarchitecture:      Mexwell
+Microarchitecture:      Maxwell
 Compute Capability:     5.0
 Shader Model:           5.0
 ```
@@ -20,8 +20,8 @@ Shader Model:           5.0
 
 1. Go to [NVIDIA Developer](https://developer.nvidia.com/cuda-toolkit) and choose the SDK Toolkit that corresponds to your videocard's `Compute Capability` and `Microarchitecture`. (List of [SDK Toolkits](https://en.wikipedia.org/wiki/CUDA#:~:text=CUDA%20works%20with%20all%20Nvidia,with%20most%20standard%20operating%20systems.))
 2. Install and unpack the SDK.
-3. Follow the prompts and in Installation Options choose `Express` option.
-4. Wait until the process is finished and you are done with CUDA. 
+3. Follow the prompts and in `Installation Options` choose `Express` option.
+4. Wait until the process is finished and now you are done with CUDA. 
 
 ## Installing the IDE (Windows)
 
@@ -34,9 +34,6 @@ Shader Model:           5.0
 1. Create a `CUDA Project`.
 2. Go to ` Project -> Properties -> CUDA C/C++ -> Device `.
 3. In field `Code Generation` enter `compute_<compute_capability>, sm_<shader_model>`.
-```
-In my case: compute_50, sm_50
-```
 4. Click `Apply`.
 
 Now you are ready to go!
