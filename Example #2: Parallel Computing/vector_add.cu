@@ -7,11 +7,11 @@
 #define TREADS_PER_BLOCK 256
 
 
-__global__ void vector_add(size_t *n, int *x, int *y) {
+__global__ void vector_add(size_t n, int *x, int *y) {
     size_t thread_id = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Handling arbitrary vector size
-    if (thread_id < *n) {
+    if (thread_id < n) {
         y[thread_id] = y[thread_id] + x[thread_id];
     }
 }
