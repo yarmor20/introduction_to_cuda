@@ -41,7 +41,7 @@ int main() {
 Let us have the next function:
 ```cuda
 __global__ void add(int *a, int *b, int *c) {
-    int *c = *a + *b;
+    *c = *a + *b;
 }
 ```
 - Note that we use pointers for the variables
@@ -53,3 +53,9 @@ __global__ void add(int *a, int *b, int *c) {
 - They are similar to `malloc()`, `memcpy()`, `free()`
 
 For complete example look at `add.cu`
+
+## Run CUDA Program
+```
+$> nvcc add.cu -o add
+$> ./add
+```
