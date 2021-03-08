@@ -59,3 +59,8 @@ For complete example look at `add.cu`
 $> nvcc add.cu -o add
 $> ./add
 ```
+
+## References
+
+- CUDA C/C++ Basics. [NVIDIA Developer](https://www.nvidia.com/docs/IO/116711/sc11-cuda-c-basics.pdf)
+- Say Hello to CUDA. [CUDA Tutorial](https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/)
