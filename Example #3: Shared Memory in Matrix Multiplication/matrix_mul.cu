@@ -15,8 +15,8 @@ __global__ void matrixMul(const int *a, const int *b, int *c, size_t N) {
     size_t col = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Allocate shared (cache) memory
-    __shared__ s_a[SHARED_MEM_SIZE];
-    __shared__ s_b[SHARED_MEM_SIZE];
+    __shared__ int s_a[SHARED_MEM_SIZE];
+    __shared__ int s_b[SHARED_MEM_SIZE];
 
     /* Shared (L1 Cache) memory capacity is very limited, so in order not
      * to get over its boundaries we will divide our multiplication on tiles.
@@ -31,18 +31,19 @@ __global__ void matrixMul(const int *a, const int *b, int *c, size_t N) {
 
     int temp = 0
     for (size_t tile = 0; tile < N; tile += blockDim.x) {
+        // Every single thread will load a single element there
         s_a[threadIdx.y * blockDim.x + threadIdx.x] = a[row * N + i + threadIdx.x];
         s_b[threadIdx.y * blockDim.x + threadIdx.x] = b[i * N + threadIdx.y * N + col];
 
         __syncthreads();
 
-        for (int k = 0; k < N; k++) {
+        for (int k = 0; k < blockDim.x; k++) {
             // Accumulate results for a single element
-            temp += a[row * N + k] * b[k * N + col];
+            temp += s_a[threadIdx.y * blockDim.x + k] * s_b[k * blockDim.x + threadIdx.x];
         }
         __syncthreads();
     }
-    c[row * N + col] = tmp;
+    c[row * N + col] = temp;
 }
 
 
